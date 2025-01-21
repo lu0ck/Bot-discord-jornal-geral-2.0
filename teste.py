@@ -13,14 +13,14 @@ CANAL_ID = 1328473388783632507
 
 # Caminhos das imagens específicas para cada horário
 IMAGENS_HORARIOS = {
-    "06:00": "D:/projetos_python_vscode/Nova pasta/bom_dia.jpg",
-    "12:00": "D:/projetos_python_vscode/Nova pasta/meio_dia.jpg",
-    "18:00": "D:/projetos_python_vscode/Nova pasta/fim_tarde.jpg",
-    "23:59": "D:/projetos_python_vscode/Nova pasta/madrugada.jpg",
+    "06:00": "/bom_dia.jpg",
+    "12:00": "/meio_dia.jpg",
+    "18:00": "/fim_tarde.jpg",
+    "23:59": "/madrugada.jpg",
 }
 
 # Caminho da imagem de manutenção
-IMAGEM_MANUTENCAO = "D:/projetos_python_vscode/Nova pasta/manutencao.png"
+IMAGEM_MANUTENCAO = "/manutencao.png"
 
 # Intents para o bot
 intents = discord.Intents.default()
