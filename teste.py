@@ -20,6 +20,7 @@ IMAGENS_HORARIOS = {
     "06:00": "images/bom_dia.jpg",
     "12:00": "images/meio_dia.jpg",
     "18:00": "images/fim_tarde.jpg",
+    "18:50": "images/fim_tarde.jpg",
     "23:59": "images/madrugada.jpg",
 }
 
