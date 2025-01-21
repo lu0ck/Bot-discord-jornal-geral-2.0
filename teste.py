@@ -2,7 +2,7 @@ import discord
 import json
 import requests
 from discord.ext import commands, tasks
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta
 import os
 from dotenv import load_dotenv
 from pytz import timezone
@@ -62,24 +62,24 @@ def construir_url(termos):
 
 # Envio de imagens e notícias nos horários específicos
 @tasks.loop(minutes=1)
+@tasks.loop(minutes=1)
 async def enviar_noticias_horarios():
-    agora_utc = datetime.now(timezone.utc)  # Hora em UTC
-    agora_brasilia = agora_utc.astimezone(FUSO_HORARIO_BRASILIA)  # Converte para Brasília
-    agora = agora_brasilia.strftime("%H:%M")  # Formata a hora
-    print(f"[DEBUG] Hora atual (Brasília): {agora}")  # Exibe a hora no fuso correto
+    agora_utc = datetime.now(pytz.UTC)  # Hora em UTC
+    agora_brasilia = agora_utc.astimezone(pytz.timezone("America/Sao_Paulo"))  # Converter para Brasília
+    hora_brasilia = agora_brasilia.strftime("%H:%M")
 
-    if agora in IMAGENS_HORARIOS:
+    print(f"[DEBUG] Hora atual em Brasília: {hora_brasilia}")
+    if hora_brasilia in IMAGENS_HORARIOS:
         canal = bot.get_channel(CANAL_ID)
         if not canal:
-            print("❌ Canal não encontrado! Verifique o ID do canal.")
+            print("Canal não encontrado! Verifique o ID do canal.")
             return
 
         # Enviar a imagem correspondente ao horário
-        caminho_imagem = IMAGENS_HORARIOS[agora]
-        try:
-            with open(caminho_imagem, "rb") as img:
-                imagem = discord.File(img)
-                await canal.send(file=imagem)
+        caminho_imagem = IMAGENS_HORARIOS[hora_brasilia]
+        with open(caminho_imagem, "rb") as img:
+            imagem = discord.File(img)
+            await canal.send(file=imagem)
                 print(f"✅ Imagem enviada para {agora}")
         except Exception as e:
             print(f"❌ Erro ao enviar a imagem para {agora}: {e}")
