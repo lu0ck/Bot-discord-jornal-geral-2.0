@@ -5,6 +5,7 @@ from discord.ext import commands, tasks
 from datetime import datetime, timedelta, timezone
 import os
 from dotenv import load_dotenv
+from pytz import timezone
 
 # Substituir os valores sensíveis
 TOKEN = os.getenv("TOKEN")
@@ -21,6 +22,9 @@ IMAGENS_HORARIOS = {
 
 # Caminho da imagem de manutenção
 IMAGEM_MANUTENCAO = "images/manutencao.png"
+
+# fuso horario codigo
+FUSO_HORARIO_BRASILIA = timezone("America/Sao_Paulo")
 
 # Intents para o bot
 intents = discord.Intents.default()
@@ -59,19 +63,26 @@ def construir_url(termos):
 # Envio de imagens e notícias nos horários específicos
 @tasks.loop(minutes=1)
 async def enviar_noticias_horarios():
-    agora = datetime.now().strftime("%H:%M")
-    print(f"[DEBUG] Hora atual: {agora}") 
+    agora_utc = datetime.now(timezone.utc)  # Hora em UTC
+    agora_brasilia = agora_utc.astimezone(FUSO_HORARIO_BRASILIA)  # Converte para Brasília
+    agora = agora_brasilia.strftime("%H:%M")  # Formata a hora
+    print(f"[DEBUG] Hora atual (Brasília): {agora}")  # Exibe a hora no fuso correto
+
     if agora in IMAGENS_HORARIOS:
         canal = bot.get_channel(CANAL_ID)
         if not canal:
-            print("Canal não encontrado! Verifique o ID do canal.")
+            print("❌ Canal não encontrado! Verifique o ID do canal.")
             return
 
         # Enviar a imagem correspondente ao horário
         caminho_imagem = IMAGENS_HORARIOS[agora]
-        with open(caminho_imagem, "rb") as img:
-            imagem = discord.File(img)
-            await canal.send(file=imagem)
+        try:
+            with open(caminho_imagem, "rb") as img:
+                imagem = discord.File(img)
+                await canal.send(file=imagem)
+                print(f"✅ Imagem enviada para {agora}")
+        except Exception as e:
+            print(f"❌ Erro ao enviar a imagem para {agora}: {e}")
 
         # Enviar as notícias
         termos = '"Aparecida de Goiânia" OR "Goiânia" OR "time Vasco da gama" OR "time vila nova" OR "time goias"'
@@ -87,10 +98,11 @@ async def enviar_noticias_horarios():
                         noticias_enviadas.add(link)
                         salvar_noticias()
                         await canal.send(f"**{titulo}**\n[Leia mais]({link})")
+                        print(f"✅ Notícia enviada: {titulo}")
             else:
-                print("Nenhuma notícia encontrada nas últimas 24 horas.")
+                print("⚠️ Nenhuma notícia encontrada nas últimas 24 horas.")
         else:
-            print(f"Erro ao buscar notícias: {response.status_code}")
+            print(f"❌ Erro ao buscar notícias: {response.status_code}")
 
 # Comando /j para buscar notícias específicas
 @bot.command(name="j")
