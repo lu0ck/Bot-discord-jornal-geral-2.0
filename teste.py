@@ -20,7 +20,7 @@ IMAGENS_HORARIOS = {
 }
 
 # Caminho da imagem de manutenção
-IMAGEM_MANUTENCAO = "/manutencao.png"
+IMAGEM_MANUTENCAO = "https://github.com/lu0ck/Bot-discord-jornal-geral-2.0/blob/main/manutencao.png"
 
 # Intents para o bot
 intents = discord.Intents.default()
