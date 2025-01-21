@@ -60,6 +60,7 @@ def construir_url(termos):
 @tasks.loop(minutes=1)
 async def enviar_noticias_horarios():
     agora = datetime.now().strftime("%H:%M")
+    print(f"[DEBUG] Hora atual: {agora}") 
     if agora in IMAGENS_HORARIOS:
         canal = bot.get_channel(CANAL_ID)
         if not canal:
