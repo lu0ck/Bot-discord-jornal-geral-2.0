@@ -13,14 +13,14 @@ CANAL_ID = 1328473388783632507
 
 # Caminhos das imagens específicas para cada horário
 IMAGENS_HORARIOS = {
-    "06:00": "/bom_dia.jpg",
-    "12:00": "/meio_dia.jpg",
-    "18:00": "/fim_tarde.jpg",
-    "23:59": "/madrugada.jpg",
+    "06:00": "images/bom_dia.jpg",
+    "12:00": "images/meio_dia.jpg",
+    "18:00": "images/fim_tarde.jpg",
+    "23:59": "images/madrugada.jpg",
 }
 
 # Caminho da imagem de manutenção
-IMAGEM_MANUTENCAO = "https://raw.githubusercontent.com/lu0ck/Bot-discord-jornal-geral-2.0/main/manutencao.png"
+IMAGEM_MANUTENCAO = "images/manutencao.png"
 
 # Intents para o bot
 intents = discord.Intents.default()
