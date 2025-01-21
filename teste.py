@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 # Substituir os valores sensíveis
 TOKEN = os.getenv("TOKEN")
 NEWS_API_KEY = os.getenv("NEWS_API_KEY")
-CANAL_ID = int(os.getenv("CANAL_ID"))
+CANAL_ID = 1328473388783632507
 
 # Caminhos das imagens específicas para cada horário
 IMAGENS_HORARIOS = {
