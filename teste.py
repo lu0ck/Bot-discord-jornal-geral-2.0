@@ -52,7 +52,7 @@ noticias_enviadas = carregar_noticias()
 # Função para construir URL com filtros
 def construir_url(termos):
     base_url = "https://newsapi.org/v2/everything"
-    data_ontem = (datetime.now(pytz.UTC) - timedelta(days=1)).strftime("%Y-%m-%d")
+    data_ontem = (datetime.now(pytz.UTC) - timedelta(days=3)).strftime("%Y-%m-%d")
     parametros = {
         "q": termos,
         "from": data_ontem,
