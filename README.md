@@ -1,6 +1,6 @@
 #In English
 
-#Discord Bot for Sending News and Images
+# Discord Bot for Sending News and Images
 
 This Discord bot is designed to send news and images at specific times and respond to custom commands directly on the server. It also allows you to send a maintenance message through commands.
 
