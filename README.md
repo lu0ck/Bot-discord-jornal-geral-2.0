@@ -1,4 +1,4 @@
-#In English
+# In English
 
 # Discord Bot for Sending News and Images
 
@@ -67,7 +67,7 @@ This project is licensed under the [MIT License](https://opensource.org/licenses
 
 
 
-#Em Português:
+# Em Português:
 
 # Bot de Discord para Envio de Notícias e Imagens
 
